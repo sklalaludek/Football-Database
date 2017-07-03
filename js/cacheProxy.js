@@ -6,14 +6,8 @@ class CacheProxy {
             }
         }).then(r => r.json() );
     }
-        /*
-         * @TODO - Uzupełnij tą metodę tak, aby zwracała Promise,
-         * które spełnia się do rozkodowanego z JSON
-         * obiektu. Wykorzystaj fetch() do pobrania zawartości z argumentu url.
-         */
     constructor() {
         this.cache = {}
-
         this.get = url => {
             if (url in this.cache)
                 return Promise.resolve(this.cache[url]);
@@ -24,6 +18,6 @@ class CacheProxy {
                 });
         }
     }
-
 }
+
 module.exports = new CacheProxy();
