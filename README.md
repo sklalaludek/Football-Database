@@ -6,5 +6,3 @@ React js
 ## Web development tools:
 * React js
 * Webpack
-
-### Credits:
