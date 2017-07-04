@@ -8,7 +8,7 @@ import {
     IndexRoute,
     hashHistory
 } from 'react-router';
-// import cacheProxy from './cacheProxy';
+import cacheProxy from '../cacheProxy';
 
 
 class CompetitionList extends React.Component {
@@ -36,7 +36,6 @@ class CompetitionList extends React.Component {
     }
 
     render(){
-        console.log(comp_list);
         if (this.state.ready === false) {
             return null;
         }
