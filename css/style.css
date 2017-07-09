@@ -1,0 +1,32 @@
+/*
+* reset
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('../img/background.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+h1 {
+    margin: 1em 0.5em;
+}
+
+ul, ol {
+    list-style-type: none;
+}
+
+.main_view {
+    width: 100vh;
+    height: 50vh;
+    margin-left: 1em;
+    display: flex;
+}
