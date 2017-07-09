@@ -13,6 +13,7 @@ import CompetitionList from './components/competitionList.jsx';
 import TeamsList from './components/teamsList.jsx';
 import PlayersList from './components/playersList.jsx';
 import NotFound from './components/notFound.jsx';
+import cacheProxy from './cacheProxy';
 
 class Home extends React.Component {
     render(){
@@ -42,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>;
         }
     }
-
     ReactDOM.render(
         <App />, document.getElementById('app'));
 });

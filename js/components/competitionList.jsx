@@ -10,7 +10,6 @@ import {
 } from 'react-router';
 import cacheProxy from '../cacheProxy';
 
-
 class CompetitionList extends React.Component {
     constructor(props){
         super(props);
@@ -26,7 +25,8 @@ class CompetitionList extends React.Component {
         .then(dataObj => {
             console.log('dataObj from competition list', dataObj);
             const comp_list = dataObj.map(function(competition){
-                return <li key={competition.id}><Link to="/">{competition.caption}</Link></li>;
+                return <li key={competition.id}><Link to={"/comp/" + competition.id}>{competition.caption}</Link>
+                </li>;
             });
             this.setState({
                 comp_list: comp_list,
@@ -35,13 +35,12 @@ class CompetitionList extends React.Component {
         });
     }
 
-    render(){
-        if (this.state.ready === false) {
-            return null;
+    render() {
+        if (this.state.ready) {
+            return <ul>{this.state.comp_list}</ul>;
+        } else {
+            return <h3>Loading...</h3> ;
         }
-        return <div>
-            <ul>{this.props.children}</ul>
-        </div>;
     }
 }
 
