@@ -6,11 +6,9 @@ export class CompetitionTemplate extends React.Component {
     render() {
         return (
             <div className='main_view'>
-                <h2>choose competition:</h2>
-                <CompetitionList />
-                {this.props.children}
-            </div>
-        );
+            <h2>choose competition:</h2>
+            <CompetitionList/> {this.props.children}
+        </div>);
     }
 }
 
