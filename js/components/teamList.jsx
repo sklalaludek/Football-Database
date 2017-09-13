@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import {
     Router,
     Route,
@@ -8,7 +9,7 @@ import {
     IndexRoute,
     hashHistory
 } from 'react-router';
-import cacheProxy from '../cacheProxy';
+// import cacheProxy from '../cacheProxy';
 
 class TeamList extends React.Component {
     constructor(props) {
@@ -19,37 +20,24 @@ class TeamList extends React.Component {
         }
     }
 
-    // componentDidMount() {
-    //     const compId = this.props.compId;
-    //     const idRegx = /http\:\/\/api.football-data.org\/v1\/teams\/(\d+)/;
-    //
-    //     cacheProxy.get("http://api.football-data.org/v1/competitions/" + compId + "/teams")
-    //         .then(data => {
-    //             const team_list = data.teams.map(team => {
-    //                 const href = team._links.self.href;
-    //                 const teamId = idRegx.exec(href)[1];
-    //                 return <li key={teamId}>{team.name} <img src={team.crestUrl} height="8" width="16"/>
-    //                 </li>});
-    //             this.setState({
-    //                 team_list: team_list,
-    //                 ready: true
-    //             });
-    //         });
-    // }
-
         componentDidMount() {
-            const teamId = this.props.params.teamId;
-            console.log(teamId);
-            cacheProxy.get(`http://api.football-data.org/v1/competitions/${teamId}/teams`)
-                .then(res => {
-                    console.log('res', res);
-                    this.setState({
-                        team_list: res.data.teams,
-                        ready: true
-                    });
-                });
+            const teamIndex = this.props.params.teamIndex;
+            console.log('teamIndex',teamIndex);
+            axios.get(`http://api.football-data.org/v1/competitions/${teamIndex}/teams`, {
+                headers: {
+                    'X-Auth-Token': 'b2190fa9c8134b2d9740ea7738a40a0d'
+                }
+            }).then(res => {
+                let data = res.data;
+                // console.log(data);
+                this.setState({team_list: data.teams, ready: true});
+            });
         }
-
+        // {team_list.map(team => {
+        //     let teamId = team._links.self.href.match(/http:\/\/api.football-data.org\/v1\/teams\/([0-9]+)/)[1];
+        //      <li key={teamId}><Link to={"/players/" + teamId}>{team.name} <img src={team.crestUrl} height="8" width="16"/></Link></li>
+        // }
+        //  )}
         render() {
          const team_list = this.state.team_list;
          return(
@@ -57,12 +45,14 @@ class TeamList extends React.Component {
                {this.state.ready
                 ? <div>
                     <ul>
-                       {team_list.map(team =>
-                         <li key={team.id}><Link to={"/players/" + team.id}>{team.name} <img src={team.crestUrl} height="8" width="16"/></Link> </li>
-                        )}
+                       {team_list.map((team, index) =>
+                            <li key={index}>
+                                <Link to={"/players/" + index}>{team.name}<img src={team.crestUrl} height="8" width="16"/></Link>
+                            </li>
+                        )};
                    </ul>
                   </div>
-                : <h3>Loading...</h3>
+                : <h3>Loading... teamList</h3>
                }
            </div>
          )

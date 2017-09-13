@@ -9,7 +9,6 @@ import {
     IndexRoute,
     hashHistory
 } from 'react-router';
-// import cacheProxy from '../cacheProxy';
 
 class PlayersList extends React.Component {
     constructor(props) {
@@ -38,43 +37,28 @@ class PlayersList extends React.Component {
     // }
 
     componentDidUpdate() {
-        const teamId = this.props.params.teamId;
+        const teamId = this.props.params;
         console.log(teamId);
-        axios.get(`http://api.football-data.org/v1/competitions/${teamId}/teams`, {
+        axios.get(`http://api.football-data.org/v1/teams/${teamId}/players`, {
             headers: {
                 'X-Auth-Token': 'b2190fa9c8134b2d9740ea7738a40a0d'
             }
         }).then(res => {
-            //    let data = res.data;
-            this.setState({team_list: res.data.teams, ready: true});
+            let data = res.data;
+            console.log(data)
+            this.setState({player_list: res.players, ready: true});
         });
-
     }
 
-    //     render() {
-    //         if (this.state.ready) {
-    //             return <div>
-    //                 <div>
-    //                     <ul>{this.state.player_list}</ul>;
-    //                 </div>
-    //                 {this.props.children}
-    //             </div>;
-    //         } else {
-    //             return <h3>Loading...</h3>;
-    //         }
-    //     }
-    // }
-
     render() {
-        const teams = this.state.team_list;
+        const players = this.state.player_list;
         return (
             <div>
                 {this.state.ready
                     ? <div>
                             <ul>
-                                {teams.map(team => <li key={team.code}>
-                                    {team.name}
-                                    <img src={team.crestUrl} height="8" width="16"/>
+                                {players.map(players, index => <li key={index}>
+                                    {players.name}
                                 </li>)}
                             </ul>
                         </div>
