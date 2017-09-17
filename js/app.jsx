@@ -20,10 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	<Router history={hashHistory}>
 		<Route path='/' component={CompetitionTemplate}>
 	        <Route path='/competition/:id' component={CompetitionList} />
-	        <Route path='/team/:competionId/teamIndex' component={TeamList} />
-	        //  <Route path='/team/:teamIndex' component={TeamList}/>
-             <Route path='/player/:teamId/:playerIndex' component={PlayersList} />
-	        // <Route path='/players/:playerId' component={PlayersList} />
+	         <Route path='/team/:teamIndex' component={TeamList}/>
+	        <Route path='/players/:playerId' component={PlayersList} />
 		</Route>
 	</Router>, document.getElementById('app'));
 });
