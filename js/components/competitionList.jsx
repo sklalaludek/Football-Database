@@ -20,19 +20,6 @@ class CompetitionList extends React.Component {
         };
     }
 
-    // componentDidMount(){
-    //     cacheProxy.get('http://api.football-data.org/v1/competitions')
-    //     .then(dataObj => {
-    //         console.log('dataObj', dataObj);
-    //         const comp_list = dataObj.map(competition => <li key={competition.id}><Link to={"/team/" + competition.id}>{competition.caption}</Link></li>);
-    //             this.setState({
-    //                 comp_list: comp_list,
-    //                 ready: true
-    //             });
-    //         });
-    //
-    // }
-
     componentDidMount() {
         axios.get('http://api.football-data.org/v1/competitions', {
             headers: {
