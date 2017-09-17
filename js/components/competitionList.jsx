@@ -21,7 +21,7 @@ class CompetitionList extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://api.football-data.org/v1/competitions', {
+        axios.get('https://api.football-data.org/v1/competitions', {
             headers: {
                 'X-Auth-Token': 'b2190fa9c8134b2d9740ea7738a40a0d'
             }

@@ -9124,7 +9124,7 @@ var CompetitionList = function (_React$Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            _axios2.default.get('http://api.football-data.org/v1/competitions', {
+            _axios2.default.get('https://api.football-data.org/v1/competitions', {
                 headers: {
                     'X-Auth-Token': 'b2190fa9c8134b2d9740ea7738a40a0d'
                 }
@@ -14945,7 +14945,7 @@ var PlayersList = function (_React$Component) {
             var _this2 = this;
 
             var teamId = this.props.params.playerId;
-            _axios2.default.get('http://api.football-data.org/v1/teams/' + teamId + '/players', {
+            _axios2.default.get('https://api.football-data.org/v1/teams/' + teamId + '/players', {
                 headers: {
                     'X-Auth-Token': 'b2190fa9c8134b2d9740ea7738a40a0d'
                 }
@@ -15047,7 +15047,7 @@ var TeamList = function (_React$Component) {
             var _this2 = this;
 
             var compId = this.props.params.teamIndex;
-            _axios2.default.get('http://api.football-data.org/v1/competitions/' + compId + '/teams', {
+            _axios2.default.get('https://api.football-data.org/v1/competitions/' + compId + '/teams', {
                 headers: {
                     'X-Auth-Token': 'b2190fa9c8134b2d9740ea7738a40a0d'
                 }
