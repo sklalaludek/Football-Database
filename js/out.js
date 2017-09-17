@@ -9119,19 +9119,6 @@ var CompetitionList = function (_React$Component) {
         return _this;
     }
 
-    // componentDidMount(){
-    //     cacheProxy.get('http://api.football-data.org/v1/competitions')
-    //     .then(dataObj => {
-    //         console.log('dataObj', dataObj);
-    //         const comp_list = dataObj.map(competition => <li key={competition.id}><Link to={"/team/" + competition.id}>{competition.caption}</Link></li>);
-    //             this.setState({
-    //                 comp_list: comp_list,
-    //                 ready: true
-    //             });
-    //         });
-    //
-    // }
-
     _createClass(CompetitionList, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
@@ -13523,11 +13510,7 @@ document.addEventListener('DOMContentLoaded', function () {
       _reactRouter.Route,
       { path: '/', component: _competitionTemplate2.default },
       _react2.default.createElement(_reactRouter.Route, { path: '/competition/:id', component: _competitionList2.default }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/team/:competionId/teamIndex', component: _teamList2.default }),
-      '//  ',
       _react2.default.createElement(_reactRouter.Route, { path: '/team/:teamIndex', component: _teamList2.default }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/player/:teamId/:playerIndex', component: _playersList2.default }),
-      '// ',
       _react2.default.createElement(_reactRouter.Route, { path: '/players/:playerId', component: _playersList2.default })
     )
   ), document.getElementById('app'));
@@ -14956,38 +14939,19 @@ var PlayersList = function (_React$Component) {
         return _this;
     }
 
-    // componentDidMount() {
-    //     const teamId = this.props.params.teamId;
-    //
-    //     // const idRegx = /http\:\/\/api.football-data.org\/v1\/teams\/(\d+)/;
-    //     cacheProxy.get("http://api.football-data.org/v1/teams/" + teamId + "/players")
-    //         .then(data => {
-    //             const player_list = data.players.map(player => {
-    //                 console.log(player);
-    //                 return <li>{player.name}</li>;
-    //             });
-    //             this.setState({
-    //                 player_list: player_list,
-    //                 ready: true
-    //             });
-    //         });
-    // }
-
     _createClass(PlayersList, [{
         key: 'componentDidUpdate',
         value: function componentDidUpdate() {
             var _this2 = this;
 
-            var teamId = this.props.params;
-            console.log(teamId);
+            var teamId = this.props.params.playerId;
             _axios2.default.get('http://api.football-data.org/v1/teams/' + teamId + '/players', {
                 headers: {
                     'X-Auth-Token': 'b2190fa9c8134b2d9740ea7738a40a0d'
                 }
             }).then(function (res) {
                 var data = res.data;
-                console.log(data);
-                _this2.setState({ player_list: res.players, ready: true });
+                _this2.setState({ player_list: data.players, ready: true });
             });
         }
     }, {
@@ -15003,11 +14967,11 @@ var PlayersList = function (_React$Component) {
                     _react2.default.createElement(
                         'ul',
                         null,
-                        players.map(players, function (index) {
+                        players.map(function (player) {
                             return _react2.default.createElement(
                                 'li',
-                                { key: index },
-                                players.name
+                                null,
+                                player.name
                             );
                         })
                     )
@@ -15082,28 +15046,33 @@ var TeamList = function (_React$Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            var teamIndex = this.props.params.teamIndex;
-            console.log('teamIndex', teamIndex);
-            _axios2.default.get('http://api.football-data.org/v1/competitions/' + teamIndex + '/teams', {
+            var compId = this.props.params.teamIndex;
+            _axios2.default.get('http://api.football-data.org/v1/competitions/' + compId + '/teams', {
                 headers: {
                     'X-Auth-Token': 'b2190fa9c8134b2d9740ea7738a40a0d'
                 }
             }).then(function (res) {
                 var data = res.data;
-                // console.log(data);
-                _this2.setState({ team_list: data.teams, ready: true });
+                var team_list = data.teams.map(function (team) {
+                    var teamId = team._links.self.href.match(/http:\/\/api.football-data.org\/v1\/teams\/([0-9]+)/)[1];
+                    return _react2.default.createElement(
+                        'li',
+                        { key: teamId },
+                        _react2.default.createElement(
+                            _reactRouter.Link,
+                            { to: "/players/" + teamId },
+                            team.name,
+                            ' ',
+                            _react2.default.createElement('img', { src: team.crestUrl, height: '8', width: '16' })
+                        )
+                    );
+                });
+                _this2.setState({ team_list: team_list, ready: true });
             });
         }
-        // {team_list.map(team => {
-        //     let teamId = team._links.self.href.match(/http:\/\/api.football-data.org\/v1\/teams\/([0-9]+)/)[1];
-        //      <li key={teamId}><Link to={"/players/" + teamId}>{team.name} <img src={team.crestUrl} height="8" width="16"/></Link></li>
-        // }
-        //  )}
-
     }, {
         key: 'render',
         value: function render() {
-            var team_list = this.state.team_list;
             return _react2.default.createElement(
                 'div',
                 null,
@@ -15113,19 +15082,7 @@ var TeamList = function (_React$Component) {
                     _react2.default.createElement(
                         'ul',
                         null,
-                        team_list.map(function (team, index) {
-                            return _react2.default.createElement(
-                                'li',
-                                { key: index },
-                                _react2.default.createElement(
-                                    _reactRouter.Link,
-                                    { to: "/players/" + index },
-                                    team.name,
-                                    _react2.default.createElement('img', { src: team.crestUrl, height: '8', width: '16' })
-                                )
-                            );
-                        }),
-                        ';'
+                        this.state.team_list
                     )
                 ) : _react2.default.createElement(
                     'h3',
