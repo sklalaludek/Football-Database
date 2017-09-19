@@ -21,9 +21,9 @@ class CompetitionList extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('https://api.football-data.org/v1/competitions', {
+        axios.get(`https://api.football-data.org/v1/competitions`, {
             headers: {
-                'X-Auth-Token': 'b2190fa9c8134b2d9740ea7738a40a0d'
+                'X-Auth-Token' : 'b2190fa9c8134b2d9740ea7738a40a0d'
             }
         }).then(res => {
             let data = res.data;
@@ -37,9 +37,10 @@ class CompetitionList extends React.Component {
             <div>
             {this.state.ready
                 ? <div>
+                    <h2>Choose competitions:</h2>
                     <ul>
                         {competitions.map(competition => <li key={competition.id}>
-                            <Link to={"/team/" + competition.id}>{competition.caption}</Link>
+                            <Link to={`/team/ ${competition.id}`}>{competition.caption}</Link>
              						</li>)}
                     </ul>
                 </div>

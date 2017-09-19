@@ -23,7 +23,7 @@ class PlayersList extends React.Component {
         const teamId = this.props.params.playerId;
         axios.get(`https://api.football-data.org/v1/teams/${teamId}/players`, {
             headers: {
-                'X-Auth-Token': 'b2190fa9c8134b2d9740ea7738a40a0d'
+                'X-Auth-Token' : 'b2190fa9c8134b2d9740ea7738a40a0d'
             }
         }).then(res => {
             let data = res.data;
