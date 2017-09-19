@@ -9144,6 +9144,11 @@ var CompetitionList = function (_React$Component) {
                     'div',
                     null,
                     _react2.default.createElement(
+                        'h2',
+                        null,
+                        'Choose competitions:'
+                    ),
+                    _react2.default.createElement(
                         'ul',
                         null,
                         competitions.map(function (competition) {
@@ -9152,7 +9157,7 @@ var CompetitionList = function (_React$Component) {
                                 { key: competition.id },
                                 _react2.default.createElement(
                                     _reactRouter.Link,
-                                    { to: "/team/" + competition.id },
+                                    { to: '/team/ ' + competition.id },
                                     competition.caption
                                 )
                             );
@@ -14873,11 +14878,6 @@ var CompetitionTemplate = exports.CompetitionTemplate = function (_React$Compone
             return _react2.default.createElement(
                 'div',
                 { className: 'main_view' },
-                _react2.default.createElement(
-                    'h2',
-                    null,
-                    'choose competition:'
-                ),
                 _react2.default.createElement(_competitionList2.default, null),
                 this.props.children
             );
@@ -15060,7 +15060,7 @@ var TeamList = function (_React$Component) {
                         { key: teamId },
                         _react2.default.createElement(
                             _reactRouter.Link,
-                            { to: "/players/" + teamId },
+                            { to: '/players/' + teamId },
                             team.name,
                             ' ',
                             _react2.default.createElement('img', { src: team.crestUrl, height: '8', width: '16' })
