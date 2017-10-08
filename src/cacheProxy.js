@@ -7,7 +7,7 @@ class CacheProxy {
         }).then(r => r.json() );
     }
     constructor() {
-        this.cache = {}
+        this.cache = {};
         this.get = url => {
             if (url in this.cache)
                 return Promise.resolve(this.cache[url]);
@@ -16,7 +16,7 @@ class CacheProxy {
                     this.cache[url] = data;
                     return data;
                 });
-        }
+        };
     }
 }
 

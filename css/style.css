@@ -54,9 +54,21 @@ li>a {
     color: #46514E;
 }
 
+#app {
+    min-width: 100%;
+}
+
 .main_view {
     margin: 50px 20px;
     display: flex;
+}
+
+.main_view * div {
+    padding: 20px;
+}
+
+.main_view div:nth-child(2) {
+    padding-top: 77px;
 }
 
 h2 {

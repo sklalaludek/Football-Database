@@ -13,7 +13,6 @@ import CompetitionList from './components/competitionList.jsx';
 import CompetitionTemplate from './components/competitionTemplate.jsx';
 import TeamList from './components/teamList.jsx';
 import PlayersList from './components/playersList.jsx';
-// import cacheProxy from './cacheProxy';
 
 document.addEventListener('DOMContentLoaded', function() {
         ReactDOM.render(

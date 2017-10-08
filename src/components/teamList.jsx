@@ -17,7 +17,7 @@ class TeamList extends React.Component {
         this.state = {
             team_list: [],
             ready: false
-        }
+        };
     }
 
         componentDidMount() {

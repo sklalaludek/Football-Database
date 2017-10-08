@@ -16,7 +16,7 @@ class PlayersList extends React.Component {
         this.state = {
             player_list: [],
             ready: false
-        }
+        };
     }
 
     componentDidUpdate() {

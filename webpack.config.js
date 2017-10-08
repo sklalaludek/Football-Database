@@ -1,7 +1,7 @@
 module.exports = {
     entry: [
         'whatwg-fetch',
-        './js/app.jsx'
+        './src/app.jsx'
     ],
     devServer: {
         inline: true,
@@ -9,7 +9,7 @@ module.exports = {
         port: 8080
     },
     output: {
-        filename: "./js/out.js"
+        filename: "./src/out.js"
     },
     watch: true,
     module: {
@@ -22,4 +22,4 @@ module.exports = {
             }
         }]
     }
-}
+};
